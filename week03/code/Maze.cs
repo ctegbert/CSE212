@@ -25,41 +25,54 @@ public class Maze
         _mazeMap = mazeMap;
     }
 
-    // TODO Problem 4 - ADD YOUR CODE HERE
-    /// <summary>
-    /// Check to see if you can move left.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        var directions = GetDirections();
+        if (!directions[0]) // left
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currX -= 1; // Move left
     }
 
-    /// <summary>
-    /// Check to see if you can move right.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        var directions = GetDirections();
+        if (!directions[1]) // right
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currX += 1; // Move right
     }
 
-    /// <summary>
-    /// Check to see if you can move up.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        var directions = GetDirections();
+        if (!directions[2]) // up
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currY -= 1; // Move up
     }
 
-    /// <summary>
-    /// Check to see if you can move down.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        var directions = GetDirections();
+        if (!directions[3]) // down
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
+        _currY += 1; // Move down
+    }
+
+    private bool[] GetDirections()
+    {
+        // Get the valid directions for the current position
+        if (_mazeMap.TryGetValue(( _currX, _currY), out var directions))
+        {
+            return directions;
+        }
+        throw new InvalidOperationException("Invalid current position!");
     }
 
     public string GetStatus()
